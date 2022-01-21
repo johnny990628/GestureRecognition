@@ -9,7 +9,6 @@
 接著利用MediaPipe內建的Function(multi_hand_landmarks)來進行手部節點的標記，最後再把節點間連結起來，取得手部於畫面的座標。
 
 ![image](https://google.github.io/mediapipe/images/mobile/hand_landmarks.png)
-
 ---
 
 ```
@@ -38,7 +37,6 @@ def main():
 ```
 
 利用了剛剛存取手部座標的List，來辨識舉起的手為右手還左手，其原理是判斷大拇指的X座標在中指的左還是右。
-
 ---
 
 ```
@@ -51,7 +49,6 @@ def handRecognize(lmList, img):
 ```
 
 利用張開的手指數來進行手勢的判斷，張開為1閉合為0，其判斷為指尖與關節的Y座標。
-
 ---
 
 ```
@@ -75,7 +72,6 @@ def rightHandRecognize(lmList, img):
 ```
 
 判斷張開的手指數顯示相對應的圖片。
-
 ---
 
 ```
