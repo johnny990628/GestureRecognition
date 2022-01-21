@@ -4,6 +4,12 @@
 ![image](https://raw.githubusercontent.com/johnny990628/GestureRecognition/master/img_2022-01-18_23-16-16_AdobeCreativeCloudExpress.gif)
 
 ## Code
+
+使用OpenCV開啟並讀取視訊鏡頭，因為OpenCV讀出來的圖片顏色模型為BGR，而MediaPipe辨識的顏色模型為RGB，因此在處理圖片時會先轉為RGB來進行處理。
+接著利用MediaPipe內建的Function(multi_hand_landmarks)來進行手部節點的標記，最後再把節點間連結起來，取得手部於畫面的座標。
+![image](https://google.github.io/mediapipe/images/mobile/hand_landmarks.png)
+---
+
 ```
 def main():
     while True:
@@ -28,9 +34,8 @@ def main():
         if cv2.waitKey(1) == ord('q'):
             break
 ```
-使用OpenCV開啟並讀取視訊鏡頭，因為OpenCV讀出來的圖片顏色模型為BGR，而MediaPipe辨識的顏色模型為RGB，因此在處理圖片時會先轉為RGB來進行處理。
-接著利用MediaPipe內建的Function(multi_hand_landmarks)來進行手部節點的標記，最後再把節點間連結起來，取得手部於畫面的座標。
-![image](https://google.github.io/mediapipe/images/mobile/hand_landmarks.png)
+
+利用了剛剛存取手部座標的List，來辨識舉起的手為右手還左手，其原理是判斷大拇指的X座標在中指的左還是右。
 ---
 
 ```
@@ -41,8 +46,10 @@ def handRecognize(lmList, img):
         elif lmList[tipID[0]][0] < lmList[tipID[4]][0]: #leftHand
             leftHandRecognize(lmList, img)
 ```
-利用了剛剛存取手部座標的List，來辨識舉起的手為右手還左手，其原理是判斷大拇指的X座標在中指的左還是右。
+
+利用張開的手指數來進行手勢的判斷，張開為1閉合為0，其判斷為指尖與關節的Y座標。
 ---
+
 ```
 def rightHandRecognize(lmList, img):
     fingers = []
@@ -62,8 +69,10 @@ def rightHandRecognize(lmList, img):
     gestureRecognize(fingers, img)
 
 ```
-利用張開的手指數來進行手勢的判斷，張開為1閉合為0，其判斷為指尖與關節的Y座標。
+
+判斷張開的手指數顯示相對應的圖片。
 ---
+
 ```
 def gestureRecognize(fingers, img):
     count = fingers.count(1)
@@ -80,6 +89,6 @@ def gestureRecognize(fingers, img):
         h, w, c = overlayImage.shape
         img[0:h, 0:w] = overlayImage
 ```
-判斷張開的手指數顯示相對應的圖片。
+
 
 
