@@ -5,10 +5,10 @@
 
 ## Code
 
+![image](https://google.github.io/mediapipe/images/mobile/hand_landmarks.png)
+
 使用OpenCV開啟並讀取視訊鏡頭，因為OpenCV讀出來的圖片顏色模型為BGR，而MediaPipe辨識的顏色模型為RGB，因此在處理圖片時會先轉為RGB來進行處理。
 接著利用MediaPipe內建的Function(multi_hand_landmarks)來進行手部節點的標記，最後再把節點間連結起來，取得手部於畫面的座標。
-
-![image](https://google.github.io/mediapipe/images/mobile/hand_landmarks.png)
 ---
 
 ```
